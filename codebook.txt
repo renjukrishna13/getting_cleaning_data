@@ -1,0 +1,36 @@
+Checked the existence of "UCI HAR Dataset"
+
+Read the training set file - UCI HAR Dataset/train/X_train.txt using read.table and stored the data frame as training
+Read the training subject file - UCI HAR Dataset/train/subject_train.txt using read.table and stored as train_sub_values
+Read train activity values - UCI HAR Dataset/train/Y_train.txt using read.table and stored as train_activity_values
+
+Read the test set file - UCI HAR Dataset/test/X_test.txt using read.table and stored the data frame as test
+Read the test subject file - UCI HAR Dataset/test/subject_test.txt using read.table and stored as test_sub_values
+Read test activity values - UCI HAR Dataset/test/Y_test.txt using read.table and stored as train_activity_values
+
+Read the feature name file UCI HAR Dataset/features.txt using read.table and stored the data frame as feature_names
+
+Read the activity labels file UCI HAR Dataset/activity_labels.txt using read.table and stored the data frame as activity
+
+Added subject and activity values to the training and test sets .. ie created training$subject,training$activity, test$subject,test$activity
+
+Added the feature labels as the column names along with subject and activity column labels changing to subject_id and activity_id
+
+Merged the training and test datasets using rbind and stored it in dataframe myset
+
+
+Extracted the columns containing mean and standard deviation using select from "dplyr " package . The contains argument was used to select the column containing "-mean()","-std()" and then to avoid column containing(-contains) "-meanFreq()" . And the myset dataframe overwritten with this selected data frame
+
+Modified the activity id using meaning full names . This was done with a merge between activity and myset and stored the data into myset_final. The acivity_id column was removed.
+
+Modified column variables with meaning full names. Did some string transformation using gsub. 
+ - Removed all ()
+ - modified std to stdDeviation
+ - modified t to time
+ - modified f to frequency
+
+myset_final after all the above steps contains the tidy dataset after step 4
+
+my_tidy_set was created by grouping the myset_final by subject_id and activity  and then calculated the columnwise mean using ncolwise()
+
+The final my_tidy_set was written to a text file named "Tidy_data_set.txt"
